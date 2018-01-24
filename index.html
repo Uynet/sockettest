@@ -1,0 +1,16 @@
+<html>
+  <meta charset = "UTF-8">
+  <body>
+    <input type = "button" value = "po" onclick = "popo()">
+  </body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+
+  let sio = io.connect('http://localhost:8080');
+  sio.on("connected",(str)=>{console.log("unko")});
+  let popo = () =>{
+    sio.emit("connected","こんにち");
+    console.log("po");
+  }
+  </script>
+</html>
