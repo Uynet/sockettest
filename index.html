@@ -6,7 +6,8 @@
     <title>ぽやしみ</title>
   </head>
   <body>
-    あ
+    <div id = "po">
+    </div>
   <form id = "myForm">
     <input type = "text" id = "msg">
     <input type="submit" valut="send">
@@ -14,11 +15,19 @@
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script>
-  $(function(){
+  let posts = [];
+  $(()=>{
     let socket = io.connect();
-    $('#myForm').submit(function(){
+    $('#myForm').submit((e)=>{
+      e.preventDefault();
       socket.emit("emit",$("#msg").val()); 
     });
+    socket.on("emitServer",(data)=>{
+      let a = document.getElementById("po");
+      let div = document.createElement("p");
+      div.innerHTML = data;  
+      a.appendChild(div);
+    })
   }); 
   </script>
     </body>

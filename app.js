@@ -1,3 +1,4 @@
+let main = require("./main");
 let app = require("http").createServer(handler),
     io = require("socket.io").listen(app),
     fs = require("fs");
@@ -14,9 +15,12 @@ function handler(req,res){
   })
 };
 
-
+io.set("log level","1");
 io.sockets.on("connection",(socket)=>{
-socket.on("emit",(data)=>{
+  socket.on("emit",(data)=>{
   console.log(data);
+  io.sockets.emit("emitServer",socket.id+data);
+  console.log("un");
+  main.main();
   });
 });
