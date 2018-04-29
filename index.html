@@ -1,16 +1,25 @@
+<!DOCTYPE html>
+<html lang = "ja">
 <html>
-  <meta charset = "UTF-8">
+  <head>
+    <meta charset = "utf-8">
+    <title>ぽやしみ</title>
+  </head>
   <body>
-    <input type = "button" value = "po" onclick = "popo()">
-  </body>
+    あ
+  <form id = "myForm">
+    <input type = "text" id = "msg">
+    <input type="submit" valut="send">
+  </form>
   <script src="/socket.io/socket.io.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script>
-
-  let sio = io.connect('http://localhost:8080');
-  sio.on("connected",(str)=>{console.log("unko")});
-  let popo = () =>{
-    sio.emit("connected","こんにち");
-    console.log("po");
-  }
+  $(function(){
+    let socket = io.connect();
+    $('#myForm').submit(function(){
+      socket.emit("emit",$("#msg").val()); 
+    });
+  }); 
   </script>
+    </body>
 </html>
